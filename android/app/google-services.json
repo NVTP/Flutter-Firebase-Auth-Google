@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "101401779329",
+    "firebase_url": "https://login-ce9de.firebaseio.com",
+    "project_id": "login-ce9de",
+    "storage_bucket": "login-ce9de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101401779329:android:4953b8ffc2a7c7b3cd4180",
+        "android_client_info": {
+          "package_name": "com.th.ac.sau.comsci.pound.login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101401779329-d1hkosum5nsf158oto654eung97b6vb4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpYT42PLNc47pRafK6GPoGbrZVWhmtrtU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101401779329-d1hkosum5nsf158oto654eung97b6vb4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
