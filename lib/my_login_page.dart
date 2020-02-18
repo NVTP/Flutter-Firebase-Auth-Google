@@ -274,6 +274,11 @@ class _MyLoginPageState extends State<MyLoginPage> {
     GoogleSignInAccount user = await _googleSignIn.signIn();
     GoogleSignInAuthentication userAuth = await user.authentication;
 
+    bool isSigned = await _googleSignIn.isSignedIn();
+    if(isSigned){
+      await _googleSignIn.signOut();
+    }
+
     await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
         idToken: userAuth.idToken, accessToken: userAuth.accessToken));
     checkAuth(context);
