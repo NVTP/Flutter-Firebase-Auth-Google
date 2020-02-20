@@ -8,7 +8,7 @@ import 'package:login/profile_page.dart';
 
 void main(){
   runApp(MaterialApp(
-    home: ProfilePage(),
+    home: MyLoginPage(),
     debugShowCheckedModeBanner: false,
   ));
 }

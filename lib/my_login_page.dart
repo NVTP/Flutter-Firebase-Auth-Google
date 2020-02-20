@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:login/book_firestore.dart';
 import 'package:login/home_page.dart';
+import 'package:login/profile_page.dart';
 import 'package:login/reset_password.dart';
 import 'package:login/sign_up.dart';
 
@@ -53,6 +56,16 @@ class _MyLoginPageState extends State<MyLoginPage> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(FontAwesomeIcons.dragon),
+          onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage())),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(FontAwesomeIcons.book,color: Colors.blueGrey,),
+            onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>BookFirestore())),
+          ),
+        ],
         title: Text('Firebase Again'),
         centerTitle: true,
         backgroundColor: Colors.green[200],
