@@ -4,6 +4,7 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:login/book_firestore.dart';
+import 'package:login/crud/loginpage.dart';
 import 'package:login/home_page.dart';
 import 'package:login/profile_page.dart';
 import 'package:login/reset_password.dart';
@@ -86,6 +87,12 @@ class _MyLoginPageState extends State<MyLoginPage> {
                 padding: EdgeInsets.all(24),
                 child: Column(
                   children: <Widget>[
+                    RaisedButton(
+                      onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage())),
+                      splashColor: Colors.transparent,
+                      child: Text('CRUD',style: TextStyle(color: Colors.white),),
+                      color: Colors.green[200],
+                    ),
                     buildTextFieldEmail(),
                     buildTextFieldPassword(),
                     buildButtonSignIn(),
