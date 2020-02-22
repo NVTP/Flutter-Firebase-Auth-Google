@@ -8,7 +8,9 @@ import 'package:login/crud/loginpage.dart';
 import 'package:login/home_page.dart';
 import 'package:login/profile_page.dart';
 import 'package:login/reset_password.dart';
+import 'package:login/role/services/role_usermanagement.dart';
 import 'package:login/sign_up.dart';
+import 'package:login/profile/loginpage.dart';
 
 class MyLoginPage extends StatefulWidget {
   @override
@@ -91,6 +93,18 @@ class _MyLoginPageState extends State<MyLoginPage> {
                       onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage())),
                       splashColor: Colors.transparent,
                       child: Text('CRUD',style: TextStyle(color: Colors.white),),
+                      color: Colors.green[200],
+                    ),
+                    RaisedButton(
+                      onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPageS())),
+                      splashColor: Colors.transparent,
+                      child: Text('Login Profile',style: TextStyle(color: Colors.white),),
+                      color: Colors.green[200],
+                    ),
+                    RaisedButton(
+                      onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>UserManagement().handleAuth())),
+                      splashColor: Colors.transparent,
+                      child: Text('Role Profile',style: TextStyle(color: Colors.white),),
                       color: Colors.green[200],
                     ),
                     buildTextFieldEmail(),

@@ -2,16 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:login/crud/loginpage.dart';
 import 'package:login/my_login_page.dart';
+import 'package:login/profile/selectprofpic.dart';
 import 'package:login/profile_page.dart';
+
+//pages
+import 'package:login/profile/homepage.dart';
+import 'package:login/profile/loginpage.dart';
+import 'package:login/profile/signuppage.dart';
+
 
 
 void main(){
   runApp(MaterialApp(
-    home: MyLoginPage(),
+    home: MyApp(),
     debugShowCheckedModeBanner: false,
   ));
 }
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyLoginPage(),
+      routes: <String, WidgetBuilder>{
+        '/landingpage': (BuildContext context)=> MyApp(),
+        '/signup': (BuildContext context) => SignupPage(),
+        '/homepage': (BuildContext context) => HomePage(),
+        '/selectpic': (BuildContext context) => SelectprofilepicPage(),
+      },
+    );
+  }
+}
+
 
 class MyMainPage extends StatefulWidget {
   @override
