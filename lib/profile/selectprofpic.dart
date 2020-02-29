@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:login/profile/homepage.dart';
 
 import 'package:login/profile/profilepage.dart';
 import 'package:login/profile/services/usermanagement.dart';
@@ -36,13 +37,13 @@ class _SelectprofilepicPageState extends State<SelectprofilepicPage> {
     StorageUploadTask task = firebaseStorageRef.putFile(newProfilePic);
     StorageTaskSnapshot snapshottask = await task.onComplete;
     String downloadUrl = await snapshottask.ref.getDownloadURL();
-//    if(downloadUrl != null){
-//      userManagement.updateProfilePic(downloadUrl.toString()).then((val){
-//        Navigator.of(context).pushReplacementNamed('/homepage');
-//      }).catchError((e){
-//        print(e);
-//      });
-//    }
+    if(downloadUrl != null){
+      userManagement.updateProfilePic(downloadUrl.toString()).then((val){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomePage()));
+      }).catchError((e){
+        print(e);
+      });
+    }
   }
 
   UserManagement userManagement = new UserManagement();
