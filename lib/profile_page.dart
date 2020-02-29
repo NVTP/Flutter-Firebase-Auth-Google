@@ -27,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     Future uploadPic(BuildContext context)async{
       String fileName = basename(_image.path);
-      StorageReference firebaseStorageRef=FirebaseStorage.instance.ref().child(fileName);
+      StorageReference firebaseStorageRef=FirebaseStorage.instance.ref().child('user/${fileName.toString()}');
       StorageUploadTask uploadTask=firebaseStorageRef.putFile(_image);
       StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
       setState(() {
