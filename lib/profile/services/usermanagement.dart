@@ -22,10 +22,11 @@ class UserManagement {
   Future updateProfilePic(picUrl)  {
     var userInfo = new UserUpdateInfo();
     userInfo.photoUrl = picUrl;
-     FirebaseAuth.instance.currentUser().then((user) {
+    FirebaseAuth.instance.currentUser().then((user){
       user.updateProfile(userInfo);
-    }).then((val) {
+    }).then((user){
       FirebaseAuth.instance.currentUser().then((user) {
+        user.updateProfile(userInfo);
         Firestore.instance
             .collection('users')
             .where('uid', isEqualTo: user.uid)
@@ -43,9 +44,9 @@ class UserManagement {
         });
       }).catchError((e) {
         print(e);
+      }).catchError((e){
+        print(e);
       });
-    }).catchError((e) {
-      print(e);
     });
   }
 }

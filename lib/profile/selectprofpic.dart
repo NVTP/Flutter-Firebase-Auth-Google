@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:path/path.dart';
 
 import 'package:flutter/material.dart';
 
@@ -29,17 +30,18 @@ class _SelectprofilepicPageState extends State<SelectprofilepicPage> {
     });
   }
 
-  uploadImage() async{
+  Future uploadImage(BuildContext context) async{
+    String fileName = basename(newProfilePic.path);
     var randomno = Random(25);
     final StorageReference firebaseStorageRef = FirebaseStorage.instance
         .ref()
-        .child('profilepics/${randomno.nextInt(5000).toString()}.jpg');
+        .child('profilepics/${fileName.toString()}');
     StorageUploadTask task = firebaseStorageRef.putFile(newProfilePic);
     StorageTaskSnapshot snapshottask = await task.onComplete;
     String downloadUrl = await snapshottask.ref.getDownloadURL();
     if(downloadUrl != null){
       userManagement.updateProfilePic(downloadUrl.toString()).then((val){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomePage()));
+        Navigator.of(context).pushReplacementNamed('/homepage');
       }).catchError((e){
         print(e);
       });
@@ -51,11 +53,11 @@ class _SelectprofilepicPageState extends State<SelectprofilepicPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: newProfilePic == null ? getChooseButton() : getUploadButton(),
+      body: newProfilePic == null ? getChooseButton(context) : getUploadButton(context),
     );
   }
 
-  Widget getChooseButton() {
+  Widget getChooseButton(BuildContext context) {
     return Stack(
       children: <Widget>[
         ClipPath(
@@ -159,7 +161,7 @@ class _SelectprofilepicPageState extends State<SelectprofilepicPage> {
     );
   }
 
-  Widget getUploadButton() {
+  Widget getUploadButton(BuildContext context) {
     return Stack(
       children: <Widget>[
         ClipPath(
@@ -218,7 +220,7 @@ class _SelectprofilepicPageState extends State<SelectprofilepicPage> {
                       color: Colors.green,
                       elevation: 7.0,
                       child: GestureDetector(
-                        onTap: uploadImage,
+                        onTap: ()=> uploadImage(context),
                         child: Center(
                           child: Text(
                             'Upload',
