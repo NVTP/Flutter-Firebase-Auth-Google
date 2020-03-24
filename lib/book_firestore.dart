@@ -10,16 +10,14 @@ class _BookFirestoreState extends State<BookFirestore> {
   String name = 'Hello';
   final db = Firestore.instance;
   void createRecord()async{
-    await db.collection('books')
-        .document('1')
-        .setData({
-      'title' : 'Master Flutter',
-      'description' : 'Programmer'
-    });
+    await db.collection('books');
     DocumentReference ref = await db.collection('books')
     .add({
       'title' : 'Flutter in Action',
       'description' : name
+    });
+    ref.updateData({
+      'DocId': ref.documentID,
     });
     print(ref.documentID);
   }
