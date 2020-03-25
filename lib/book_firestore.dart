@@ -9,45 +9,53 @@ class BookFirestore extends StatefulWidget {
 class _BookFirestoreState extends State<BookFirestore> {
   String name = 'Hello';
   final db = Firestore.instance;
-  void createRecord()async{
+
+  void createRecord() async {
     await db.collection('books');
-    DocumentReference ref = await db.collection('books')
-    .add({
-      'title' : 'Flutter in Action',
-      'description' : name
-    });
+    DocumentReference ref = await db
+        .collection('books')
+        .add({'title': 'Flutter in Action', 'description': name});
     ref.updateData({
       'DocId': ref.documentID,
+      'time': FieldValue.serverTimestamp(), //Timestamp.now()
+      'creatAt': DateTime.now().year.toString() +
+          '/' +
+          DateTime.now().month.toString() +
+          '/' +
+          DateTime.now().day.toString() +
+          ' , ' +
+          DateTime.now().hour.toString() +
+          ':' +
+          DateTime.now().minute.toString()
+    }).then((val){
+      ref.setData({
+        'test New': Timestamp.now()
+      },merge: true);
     });
     print(ref.documentID);
   }
 
-  void getData(){
-    db.collection('books')
-        .getDocuments()
-        .then((QuerySnapshot snapshot){
-       snapshot.documents.forEach((f)=>print('${f.data}'));
+  void getData() {
+    db.collection('books').getDocuments().then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((f) => print('${f.data}'));
     });
   }
 
-  void updateDate(){
-    try{
-      db.collection('books')
+  void updateDate() {
+    try {
+      db
+          .collection('books')
           .document('1')
-          .updateData({
-        'description' : 'First Update'
-      });
-    }catch (e){
+          .updateData({'description': 'First Update'});
+    } catch (e) {
       print(e.toString());
     }
   }
 
-  void deleteData(){
-    try{
-      db.collection('books')
-          .document('1')
-          .delete();
-    }catch (e){
+  void deleteData() {
+    try {
+      db.collection('books').document('1').delete();
+    } catch (e) {
       print(e.toString());
     }
   }
@@ -67,25 +75,37 @@ class _BookFirestoreState extends State<BookFirestore> {
           children: <Widget>[
             RaisedButton(
               splashColor: Colors.transparent,
-              child: Text('Create Record',style: TextStyle(color: Colors.white),),
+              child: Text(
+                'Create Record',
+                style: TextStyle(color: Colors.white),
+              ),
               onPressed: createRecord,
               color: Colors.green[100],
             ),
             RaisedButton(
               splashColor: Colors.transparent,
-              child: Text('Get Data',style: TextStyle(color: Colors.white),),
+              child: Text(
+                'Get Data',
+                style: TextStyle(color: Colors.white),
+              ),
               onPressed: getData,
               color: Colors.green[100],
             ),
             RaisedButton(
               splashColor: Colors.transparent,
-              child: Text('Update Data',style: TextStyle(color: Colors.white),),
+              child: Text(
+                'Update Data',
+                style: TextStyle(color: Colors.white),
+              ),
               onPressed: updateDate,
               color: Colors.green[100],
             ),
             RaisedButton(
               splashColor: Colors.transparent,
-              child: Text('Delete Data',style: TextStyle(color: Colors.white),),
+              child: Text(
+                'Delete Data',
+                style: TextStyle(color: Colors.white),
+              ),
               onPressed: deleteData,
               color: Colors.green[100],
             ),
