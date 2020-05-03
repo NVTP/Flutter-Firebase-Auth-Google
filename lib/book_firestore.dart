@@ -11,12 +11,13 @@ class _BookFirestoreState extends State<BookFirestore> {
   final db = Firestore.instance;
 
   void createRecord() async {
-    await db.collection('books');
+     db.collection('books');
     DocumentReference ref = await db
         .collection('books')
         .add({'title': 'Flutter in Action', 'description': name});
     ref.updateData({
       'DocId': ref.documentID,
+      'add': DateTime.now(),
       'time': FieldValue.serverTimestamp(), //Timestamp.now()
       'creatAt': DateTime.now().year.toString() +
           '/' +
